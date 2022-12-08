@@ -1,0 +1,23 @@
+main, form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  width: 500px;
+  height: 500px;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 0 0 20px black;
+}
+form input {
+  font-size: 30px;
+}
+form h1 {
+  margin-top: 20%;
+}
+form p {
+  color: red;
+  display: none;
+}/*# sourceMappingURL=userLogin.css.map */

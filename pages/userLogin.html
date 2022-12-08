@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../SCSS/global.css">
-    <link rel="stylesheet" href="../SCSS/index.css">
+    <link rel="stylesheet" href="../SCSS/userLogin.css">
     <script src="../js/navbar.js"></script>
     
     
@@ -17,7 +17,56 @@
     <script>
       function pageLoad()
       {
+        //adds the functionality of the responsive navbar to the page
         addCollapseControl();
+
+        //initalize username and password to empty strings
+        let username = '';
+        let password = '';
+
+        //makes an ajax call using the userLogin.php file along with a username and password entered in the from
+        //add what happens when user is successful and unsucessful
+        const userLogIn = () =>{
+            event.preventDefault();
+            var xmlhttp = new XMLHttpRequest();
+
+            username = usernameField.value;
+            console.log(username);
+
+            password = passwordField.value;
+            console.log(password);
+
+            xmlhttp.open("POST","../PHP/userLogin.php?username=" + username + "&password=" + password,true);
+            
+            xmlhttp.send();
+
+            xmlhttp.onreadystatechange=function(){
+			        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                    let PHPresponse = xmlhttp.responseText; //data returned as a string
+                    //console.log("this is js",PHPresponse)
+                    if(PHPresponse == "Valid User")
+                    {
+                        //take back to page if it was a redirect or take to account page if account page was being accessed
+                    }
+                    else{
+                        errorMsg.style.display = 'block';
+                    }
+                    }
+
+                }  
+        }
+
+        //get access to the form
+        let loginForm = document.querySelector('#userLogin');
+        loginForm.onsubmit = userLogIn;//call userLogin function when the form is submitted
+
+        //get access to the username and password input fields in the user login form
+        let usernameField = document.querySelector("#username");
+        let passwordField = document.querySelector("#password");
+
+        //get access to error message text
+        let errorMsg = document.querySelector("#errorMsg");
 
       }
 
@@ -39,9 +88,12 @@
         </nav>
     </header>
   <main>
-    <form action="../PHP/userLogin.php">
+    <form method="post" id="userLogin">
+        <h1>Account Login</h1>
+        <p id="errorMsg">Username or password is incorrect</p>
         <input type="text" name="username" id="username" placeholder="username">
         <input type="password" name="password" id="password" placeholder="password">
+        <button type="submit" name="submit" id="submit">Log In</button>
     </form>
   </main> 
 </body>
