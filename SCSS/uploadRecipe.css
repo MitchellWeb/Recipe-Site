@@ -1,0 +1,124 @@
+p {
+  font-size: 40px;
+  margin: 0;
+}
+
+label, input, select {
+  font-size: 30px;
+}
+
+label {
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+}
+form section#topSection {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+form section#topSection section {
+  width: 75%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+form section#topSection section label {
+  width: 200px;
+  text-align: right;
+}
+form section.ingredient {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+form section#ingredientSection {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form section#ingredientSection label {
+  width: 200px;
+  text-align: right;
+}
+form section#ingredientSection input#number {
+  width: 50px;
+  margin-right: 10px;
+}
+form section#ingredientSection select#ingredient_quantity {
+  width: 75px;
+  margin-right: 10px;
+}
+form section#ingredientSection select#ingredient_unit {
+  margin-right: 10px;
+}
+form section#ingredientSection input#ingredient_name {
+  width: 200px;
+}
+form section#instructionsSection {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form section#instructionsSection section {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+form section#instructionsSection section label {
+  width: 200px;
+  text-align: right;
+}
+form section#instructionsSection section textarea {
+  font-size: 20px;
+}
+form #addIngredientIcon {
+  display: flex;
+  justify-content: right;
+}
+
+@media only screen and (max-width: 900px) {
+  label, input, select {
+    font-size: 35px;
+  }
+  form > section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  form > section label {
+    width: 30%;
+    text-align: left;
+    margin: 0 0 0 1rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  form {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+  }
+  form section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  form section label {
+    width: 100%;
+    text-align: left;
+    margin: 0 0 0 1rem;
+  }
+}/*# sourceMappingURL=uploadRecipe.css.map */
