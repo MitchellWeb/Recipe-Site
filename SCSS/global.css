@@ -1,10 +1,9 @@
 body {
+  background: linear-gradient(135deg, hsl(0deg, 81%, 48%) 0%, hsl(289deg, 83%, 61%) 100%);
   width: 95%;
   height: 1000px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url(../images/background.png);
-  background-repeat: repeat;
 }
 
 header {
@@ -13,14 +12,14 @@ header {
   width: 95%;
   margin-left: auto;
   margin-right: auto;
-  background-color: red;
+  background-color: grey;
 }
 
 main {
   z-index: 0;
-  background-color: aquamarine;
   position: relative;
   top: 15%;
+  background-color: white;
 }
 
 nav {
@@ -46,9 +45,6 @@ ul {
 }
 
 @media only screen and (max-width: 1065px) {
-  body {
-    background-image: url(../images/small-background.png);
-  }
   .collapse-icon {
     display: block;
   }
