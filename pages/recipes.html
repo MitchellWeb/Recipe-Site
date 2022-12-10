@@ -23,6 +23,12 @@
               location.reload();
             }
 
+            const refresh = () =>
+            {
+              retrieveRecipe();
+            }
+
+            
             window.onbeforeunload = retrieveRecipe;
 
             let recipeContainer = document.querySelector('#recipeContainer');
@@ -71,14 +77,13 @@
             }
 
             loadRecipes();
-
           }
             
   
         window.onresize = checkWidth;// calls the checkWidth() function anytime the window object it resized see js/navar.js for function details
       </script>
 </head>
-<body onload="pageLoad()">
+<body onload="pageLoad()" onbeforeunload="refresh()">
     <header>
         <nav>
           <img class="collapse-icon" src="../images/iconmonstr-menu-thin-96.png" alt=""><!--three line menu icon, hidden by default-->
