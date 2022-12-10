@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../SCSS/global.css">
-    <link rel="stylesheet" href="../SCSS/index.css">
+    <link rel="stylesheet" href="../SCSS/viewRecipe.css">
     <script src="../js/navbar.js"></script>
     <script src="../js/retrieveRecipeJSON.js"></script>
     
@@ -21,14 +21,113 @@
       {
         addCollapseControl();
 
-        let recipeId = sessionStorage.getItem("RecipeViewId");
-        
-        retrieveRecipeJSON(recipeId);
+        const getRecipe = () =>{
+          let recipeId = sessionStorage.getItem("RecipeViewId");
+          retrieveRecipeJSON(recipeId);
+        }
 
-        let recipeJSON = sessionStorage.getItem('RecipeJSON');
-        let recipe = JSON.parse(recipeJSON);
+        const setRecipe = () =>{
+          let recipeJSON = sessionStorage.getItem('RecipeJSON');
+          let recipe = JSON.parse(recipeJSON);
+          console.log(recipe);
+          displayRecipe(recipe);
+        }
         
+        let ingredientsList = document.querySelector("#ingredientsList");
+        const loadIngredients = (recipe) =>{
+            recipe.ingredients.forEach( (ingredient) =>{
+            let ingr = document.createElement('li'); 
+
+            let quantity1 = ingredient.ingredientQuantity1;
+            let quantity2 = ingredient.ingredientQuantity2;
+            if(quantity2 == 0)
+            {
+              quantity2 = "";
+            }
+            let unit = ingredient.ingredientUnit;
+            let name = ingredient.ingredientName;
+
+            ingr.innerHTML = quantity1 + " "
+            + quantity2 + " "
+            + unit + " "
+            + name;
+
+            ingredientsList.appendChild(ingr);
+          });
+        }
+
+        let instructionsList = document.querySelector("#instructionsList");
+        const loadInstructions = (recipe) =>{
+          recipe.instructions.forEach( (instruction) =>{
+            let inst = document.createElement('li');       
+            inst.innerHTML = instruction;
+            instructionsList.appendChild(inst);
+          });
+        }
         
+        const displayRecipe = (recipe) =>{
+          let recipeImage = document.querySelector("#recipeImage");
+          recipeImage.src = "../images/" + recipe.imageUrl;
+
+          let recipeTitle = document.querySelector("#recipeTitle");
+          recipeTitle.innerHTML = recipe.title;
+
+          let recipeAuthor = document.querySelector("#recipeAuthor");
+          recipeAuthor.innerHTML = recipe.author;
+
+          let recipeDiffuculty = document.querySelector("#recipeDifficulty");
+          recipeDiffuculty.innerHTML = recipe.difficulty;
+
+          let ingredientsList = document.querySelector("#ingredientsList");
+
+          loadIngredients(recipe);
+
+          let instructionsList = document.querySelector("#instructionsList");
+
+          loadInstructions(recipe);
+
+         
+          let hideIngredientsButton = document.querySelector("#hideIngredients");
+
+          
+      }
+      getRecipe();
+      setTimeout(setRecipe,100);
+
+      let ingredientListStatus = "visible";
+
+      const hideShowIngredients = () =>{
+        if(ingredientListStatus == "visible")
+        {
+          ingredientsList.style.display = "none"
+          ingredientListStatus = "hidden";
+        }
+        else{
+          ingredientsList.style.display = "flex";
+          ingredientListStatus = "visible";
+        }
+      }
+      let hideIngredientsButton = document.querySelector("#hideIngredients");
+          hideIngredientsButton.onclick = hideShowIngredients;
+
+          let instructionListStatus = "visible";
+
+      const hideShowInstructions = () =>{
+        if(instructionListStatus == "visible")
+        {
+          instructionsList.style.display = "none"
+          instructionListStatus = "hidden";
+        }
+        else{
+          instructionsList.style.display = "flex";
+          instructionListStatus = "visible";
+        }
+      }
+      let hideInstructionButton = document.querySelector("#hideInstruction");
+          hideInstructionButton.onclick = hideShowInstructions;
+
+      
+      //hideIngredientsButton.onclick = hideShowIngredients;
       }
 
       window.onresize = checkWidth;// calls the check width function anytime the window object it resized
@@ -49,12 +148,16 @@
         </nav>
     </header>
   <main>
+    <section id="recipeDisplay">
     <img id="recipeImage" src="" alt="">
     <h1 id="recipeTitle"></h1>
     <h2>Recipe by: <span id="recipeAuthor"></span></h2>
-    <h3>Difficulty: <span id="recipeDiffuculty"></span></h2>
+    <h3>Difficulty: <span id="recipeDifficulty"></span></h2>
+    <button id="hideIngredients">Hide Ingredients</button>
     <ul id="ingredientsList"></ul>
+    <button id="hideInstruction">Hide Ingredients</button>
     <ul id="instructionsList"></ul>
+  </section>
   </main> 
 </body>
 
