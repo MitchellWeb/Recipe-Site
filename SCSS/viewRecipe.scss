@@ -1,0 +1,16 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    #recipeDisplay{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+     ul{
+        display: flex;
+        flex-direction: column;
+    }   
+    }
+    
+}

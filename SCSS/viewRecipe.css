@@ -1,0 +1,15 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main #recipeDisplay {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main #recipeDisplay ul {
+  display: flex;
+  flex-direction: column;
+}/*# sourceMappingURL=viewRecipe.css.map */
