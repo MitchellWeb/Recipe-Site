@@ -149,7 +149,7 @@
                 newRecipe.author = recipe_author.value;
                 newRecipe.difficulty = recipe_difficulty.value;
                 newRecipe.ingredients = ingredientsList;
-                newRecipe.instructions = ingredientsList;
+                newRecipe.instructions = instructionsList;
                 newRecipe.imageUrl = fileToUpload.files[0].name;
 
                 console.log(newRecipe);
@@ -273,7 +273,7 @@
                 </section>
                 <template>
                     <section class="instruction" id="instruction">
-                        <textarea name="instruction" id="instructionText" cols="45" rows="4" placeholder="add instruction here"></textarea>
+                        <textarea name="instruction" id="instruction" cols="45" rows="4" placeholder="add instruction here"></textarea>
                         <img id="removeInstruction" src="../images/iconmonstr-minus-circle-filled-48.png" alt="remove instruction">
                     </section>
                 </template>
