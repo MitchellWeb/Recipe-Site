@@ -9,16 +9,73 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../SCSS/global.css">
-    <link rel="stylesheet" href="../SCSS/index.css">
+    <link rel="stylesheet" href="../SCSS/recipes.css">
     <script src="../js/navbar.js"></script>
+    <script src="../js/retrieveRecipes.js"></script>
     <script>
         function pageLoad()
         {
             addCollapseControl();
+
+            if(sessionStorage.getItem('RecipeTitleArray') === null)
+            {
+              retrieveRecipe();
+              location.reload();
+            }
+
+            window.onbeforeunload = retrieveRecipe;
+
+            let recipeContainer = document.querySelector('#recipeContainer');
+
+            const loadRecipes = () =>
+            {
+              //used to display the recipe card templates dynamically
+              const displayRecipeCard = (counter, title, img, id) =>
+              {
+                var templateElm = document.querySelector('template');//access template
+                var tempClone = templateElm.content.cloneNode(true);//create clone of template
+                recipeContainer.appendChild(tempClone);//add template to the recipe container
+
+                let recipeCard = document.querySelector('#recipeCard');
+                recipeCard.id = 'recipeCard' + counter;  
+
+                let recipeCardImage = document.querySelector("#"+recipeCard.id + " > #recipeImage");
+                recipeCardImage.src = "../images/" + img;
+
+                let recipeCardTitle = document.querySelector("#"+recipeCard.id + " > #recipeTitle");
+                recipeCardTitle.innerHTML = title;
+
+                let recipeCardId = document.querySelector("#"+recipeCard.id + " > #recipeId");
+                recipeCardId.onclick = () =>{sessionStorage.setItem("RecipeViewId", id)};
+                recipeCardId.value = id;
+
+
+
+                
+              }
+
+            
+              let recipeTitleArray = JSON.parse(sessionStorage.getItem('RecipeTitleArray'));
+              
+              let recipeImageArray = JSON.parse(sessionStorage.getItem('RecipeImageArray'));
+
+              let recipeIdArray = JSON.parse(sessionStorage.getItem('RecipeIdArray'));
+                
+              for(let i=0; i <recipeTitleArray.length; i++)
+                  {
+                      let recipeTitle = recipeTitleArray[i];
+                      let recipeImg = recipeImageArray[i];
+                      let recipeId = recipeIdArray[i]
+                      displayRecipeCard(i, recipeTitle, recipeImg, recipeId);
+                  }
+            }
+
+            loadRecipes();
+
+          }
+            
   
-        }
-  
-        window.onresize = checkWidth;// calls the check width function anytime the window object it resized
+        window.onresize = checkWidth;// calls the checkWidth() function anytime the window object it resized see js/navar.js for function details
       </script>
 </head>
 <body onload="pageLoad()">
@@ -35,8 +92,18 @@
         </nav>
     </header>
   <main>
-    
-
+    <h1>Browse Recipes</h1>
+    <section id="recipeContainer">
+      <template>
+        <div class="recipeCard" id="recipeCard"> 
+          <img id="recipeImage" src="../images/testImage.gif" alt="">
+          <h1 id="recipeTitle">Recipe Title</h1>
+          <a href="recipeView.html" id="recipeId" value="" href="recipeView.html">View Recipe</a>
+        </div>
+      </template>
+      
+      
+  </section>
   </main> 
 </body>
 </html>
