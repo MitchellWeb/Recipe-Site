@@ -20,6 +20,7 @@ main {
   position: relative;
   top: 15%;
   background-color: white;
+  padding: 10px;
 }
 
 nav {
