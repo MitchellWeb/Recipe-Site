@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitchell Nesheim Portfolio Site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../SCSS/global.css">
+    <link rel="stylesheet" href="../SCSS/index.css">
+    <script src="../js/navbar.js"></script>
+    <script src="../js/retrieveRecipeJSON.js"></script>
+    
+    
+    
+    
+    <script>
+      function pageLoad()
+      {
+        addCollapseControl();
+
+        let recipeId = sessionStorage.getItem("RecipeViewId");
+        
+        retrieveRecipeJSON(recipeId);
+
+        let recipeJSON = sessionStorage.getItem('RecipeJSON');
+        let recipe = JSON.parse(recipeJSON);
+        
+        
+      }
+
+      window.onresize = checkWidth;// calls the check width function anytime the window object it resized
+    </script>
+
+</head>
+<body onload="pageLoad()">
+    <header>
+        <nav>
+          <img class="collapse-icon" src="../images/iconmonstr-menu-thin-96.png" alt=""><!--three line menu icon, hidden by default-->
+          <ul class="nav-list">
+            <a href="index.html"><li id="home">Home</li></a>
+            <a href="recipes.html"><li id="recipes">Recipes</li></a>
+            <a href="myRecipes.html"><li id="myRecipes">My Recipes</li></a>
+            <a href="savedRecipes.html"><li id="savedRecipes">Saved Recipes</li></a>
+            <a href="uploadRecipe.html"><li id="uploadRecipe">Add Recipes</li></a>
+          </ul>
+        </nav>
+    </header>
+  <main>
+    <img id="recipeImage" src="" alt="">
+    <h1 id="recipeTitle"></h1>
+    <h2>Recipe by: <span id="recipeAuthor"></span></h2>
+    <h3>Difficulty: <span id="recipeDiffuculty"></span></h2>
+    <ul id="ingredientsList"></ul>
+    <ul id="instructionsList"></ul>
+  </main> 
+</body>
+
+</html>
